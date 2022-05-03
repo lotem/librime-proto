@@ -1,0 +1,3 @@
+[submodule "deps/capnproto"]
+	path = deps/capnproto
+	url = https://github.com/lotem/capnproto.git

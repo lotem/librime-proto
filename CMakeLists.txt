@@ -1,7 +1,12 @@
 project(rime-proto)
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_SOURCE_DIR})
+
 find_package(CapnProto REQUIRED)
+
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 # search path for capnp schemata: *.capnp
 set(RIME_PROTO_SCHEMA_DIR ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
