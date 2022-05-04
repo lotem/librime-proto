@@ -33,9 +33,21 @@ if %clean% == 1 (
   rmdir /s /q deps\capnproto\build
 )
 
-set deps_cmake_flags=-G%CMAKE_GENERATOR%^
- -A%ARCH%^
- -T%PLATFORM_TOOLSET%^
+if defined RIME_ROOT (
+if exist %RIME_ROOT%\env.bat (
+  call %RIME_ROOT%\env.bat
+))
+
+if defined CMAKE_GENERATOR (
+  set deps_cmake_flags=%deps_cmake_flags% -G%CMAKE_GENERATOR%
+)
+if defined ARCH (
+  set deps_cmake_flags=%deps_cmake_flags% -A%ARCH%
+)
+if defined PLATFORM_TOOLSET (
+  set deps_cmake_flags=%deps_cmake_flags% -T%PLATFORM_TOOLSET%
+)
+set deps_cmake_flags=%deps_cmake_flags%^
  -DCMAKE_CONFIGURATION_TYPES:STRING="%build_config%"^
  -DCMAKE_CXX_FLAGS_RELEASE:STRING="/MT /O2 /Ob2 /DNDEBUG"^
  -DCMAKE_C_FLAGS_RELEASE:STRING="/MT /O2 /Ob2 /DNDEBUG"^
